@@ -1,0 +1,1 @@
+{"version":3,"sources":["CircularBuffer.js"],"names":["CircularBuffer"],"mappings":";;;;;AAAA,IAAIA,iBAAiB,MAAMA,cAAN,CAAqB,EAA1C;;kBAIeA,c","file":"CircularBuffer.js","sourcesContent":["var CircularBuffer = class CircularBuffer {\n\n};\n\nexport default CircularBuffer;\n"],"sourceRoot":"/run/media/ferdinand/543D677F4B28C1CB/recherche/2017_roomba/circular-buffer/src"}

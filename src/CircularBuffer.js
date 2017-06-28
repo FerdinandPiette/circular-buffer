@@ -75,6 +75,9 @@ var CircularBuffer = class CircularBuffer {
     pop() {
         return this.get(1);
     }
+    getRawBuffer() {
+        return this._buffer;
+    }
 };
 
 export default new Proxy(CircularBuffer, ModelMetaProgrammingInterface);

@@ -9,7 +9,7 @@
     "url": "https://github.com/FerdinandPiette/cyclic-buffer.git"
   },
   "scripts": {
-    "start": "gulp run",
+    "start": "gulp rebuild",
     "clean": "gulp clean",
     "test": "ava -v"
   },

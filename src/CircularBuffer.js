@@ -3,13 +3,13 @@
 
 var InstanceMetaProgrammingInterface = {
     get: function(object, property) {
-        //if('string' === typeof property) {
+        if('string' === typeof property) {
             var abstractIndex = parseInt(property);
             if(Number.isInteger(abstractIndex)) {
                 let realIndex = (object._beginIndex + abstractIndex) % object.capacity();
                 return object._buffer[realIndex];
             }
-        //}
+        }
         return object[property];
     }
 };

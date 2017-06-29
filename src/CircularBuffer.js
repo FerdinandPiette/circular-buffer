@@ -3,14 +3,14 @@
 
 var InstanceMetaProgrammingInterface = {
     get: function(object, property) {
-        if('string' === typeof property) {
+        //if('string' === typeof property) {
             var abstractIndex = parseInt(property);
             if(Number.isInteger(abstractIndex)) {
                 let realIndex = (object._beginIndex + abstractIndex) % object.capacity();
                 return object._buffer[realIndex];
             }
-            return object[property];
-        }
+        //}
+        return object[property];
     }
 };
 
@@ -37,7 +37,7 @@ var CircularBuffer = class CircularBuffer {
     put(enumerable) {
         if(!(enumerable instanceof Buffer)) { enumerable = Buffer.from(enumerable); }
         if(enumerable.length > this.capacity()) { return false; }
-        
+
         var writingIndex = (this._beginIndex + this.size()) % this.capacity();
         if(this.capacity() < writingIndex + enumerable.length) {
             // split & copy

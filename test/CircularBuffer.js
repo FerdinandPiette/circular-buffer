@@ -1,12 +1,13 @@
 import CircularBuffer from '../build/CircularBuffer';
 import test from 'ava';
 
-test('CircularBuffer#constructor', t => {
-    t.plan(5);
-    
+test('CircularBuffer#constructor', t => {    
     const size = 5;
     var buffer = new CircularBuffer(size);
     
+    t.plan(6);
+    
+    t.true(buffer instanceof CircularBuffer);
     t.is(buffer._maxLength, size);
     t.is(buffer._beginIndex, 0);
     t.is(buffer._size, 0);
@@ -30,21 +31,24 @@ test('CircularBuffer#put', t => {
     var buffer = new CircularBuffer(size);
     var array1 = [10,11,12];
     var array2 = [13,14,15];
+    var array3 = [16,17,18,19,20,21,22];
     
-    t.plan(4+array1.length+size);
+    t.plan(8+array1.length+size);
     
-    buffer.put(array1);
+    t.is(buffer.put(array1), true);
     t.is(buffer._size, 3);
     t.is(buffer._beginIndex, 0);
     for(let i = 0; i < array1.length; ++i) {
         t.is(buffer._buffer[buffer._beginIndex+i], array1[i]);
     }
     
-    buffer.put(array2);
+    t.is(buffer.put(array2), true);
     t.is(buffer._size, 5);
     t.is(buffer._beginIndex, 1);
     [11,12,13,14,15].forEach((n,index) => t.is(buffer._buffer[(buffer._beginIndex+index)%buffer._maxLength], n));
     
+    t.is(buffer.put(array3), false);
+    t.is(buffer._beginIndex, 1);
 });
 
 test('CircularBuffer#accessor[]', t => {
@@ -151,17 +155,17 @@ test('CircularBuffer#push', t => {
     var array1 = [9,10,11,12,13]
     var array2 = [14,15,16,17];
     
-    t.plan(3*array1.length+2*array2.length+1);
+    t.plan(4*array1.length+3*array2.length+1);
     
     array1.forEach((n,i) => {
-        buffer.push(n);
+        t.is(buffer.push(n), true);
         t.is(buffer.size(), i+1);
         t.is(buffer[i], n);
         t.is(buffer._beginIndex, 0);
     });
     
     array2.forEach((n,i) => {
-        buffer.push(n);
+        t.is(buffer.push(n), true);
         t.is(buffer.size(), size);
         t.is(buffer._beginIndex, i+1);
     });

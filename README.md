@@ -1,14 +1,14 @@
-# ring-buffer
-NodeJS ring buffer (also named circular buffer) based on native Buffer.
+# cyclic-buffer
+NodeJS circular buffer based on native NodeJS Buffer.
 
 ## Installation
-`npm install ring-buffer --save`
+`npm install cyclic-buffer --save`
 
 ## Example
 ```
-var RingBuffer = require('ring-buffer');
+var CircularBuffer = require('cyclic-buffer');
 
-var buffer = new RingBuffer(5);
+var buffer = new CircularBuffer(5);
 
 buffer.put(Buffer.from([10,11,12]));
 console.log('There is ', buffer.size(), 'elements in the buffer');
@@ -34,7 +34,7 @@ while(buffer.size() > 0) {
 console.log('There is ', buffer.size(), 'elements in the buffer');
 ```
 ## Documentation
-### new RingBuffer(size)
+### new CircularBuffer(size)
 
 Constructs a ring buffer.
 
@@ -43,21 +43,21 @@ Constructs a ring buffer.
 
 -----
 
-###  RingBuffer#capacity()
+###  CircularBuffer#capacity()
 
 #### Returns
 *(Number)* Returns the maximum storage capacity of the buffer.
 
 -----
 
-###  RingBuffer#size()
+###  CircularBuffer#size()
 
 #### Returns
 *(Number)* Returns the number of elements in the buffer.
 
 -----
 
-###  RingBuffer#push(element)
+###  CircularBuffer#push(element)
 
 #### Arguments
 - `element` *(Number)*: Add a single element at the end of the buffer.
@@ -67,14 +67,14 @@ Constructs a ring buffer.
 
 -----
 
-###  RingBuffer#shift()
+###  CircularBuffer#shift()
 
 #### Returns
 *(Number)* Returns the first element of the buffer.
 
 -----
 
-###  RingBuffer#put(enumerable)
+###  CircularBuffer#put(enumerable)
 
 #### Arguments
 - `enumerable`: Each element of this enumerable variable is inserted in the buffer.
@@ -84,7 +84,7 @@ Constructs a ring buffer.
 
 -----
 
-###  RingBuffer#get(size)
+###  CircularBuffer#get(size)
 
 #### Arguments
 - `size` *(Number)*: The number of elements to retrieve.
@@ -94,14 +94,14 @@ Constructs a ring buffer.
 
 -----
 
-###  RingBuffer#getRawBuffer()
+###  CircularBuffer#getRawBuffer()
 
 #### Returns
-*(Buffer)* Returns the raw Buffer using by the RingBuffer instance.
+*(Buffer)* Returns the raw Buffer using by the CircularBuffer instance.
 
 -----
 
-###  RingBuffer#accessor[index]
+###  CircularBuffer#accessor[index]
 
 #### Arguments
 - `index` *(Number)*: The index of the element to consult.

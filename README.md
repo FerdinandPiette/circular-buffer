@@ -67,7 +67,7 @@ Constructs a circular buffer.
 
 -----
 
-###  CircularBuffer#pop()
+###  CircularBuffer#shift()
 
 #### Returns
 *(Number)* Returns the first element of the buffer.

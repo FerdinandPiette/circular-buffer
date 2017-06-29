@@ -91,7 +91,7 @@ var CircularBuffer = class CircularBuffer {
         this._beginIndex = (this._beginIndex + size) % this.capacity();
         return data;
     }
-    pop() {
+    shift() {
         return this.get(1)[0];
     }
     getRawBuffer() {

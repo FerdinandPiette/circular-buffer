@@ -169,7 +169,7 @@ test('CircularBuffer#push', t => {
     t.is(buffer[0], array1[4]);
 });
 
-test('CircularBuffer#pop', t => {
+test('CircularBuffer#shift', t => {
     const size = 5;
     var buffer = new CircularBuffer(size);
     var array1 = [9,10,11,12,13]
@@ -178,7 +178,7 @@ test('CircularBuffer#pop', t => {
     t.plan(9+2*(size-1));
     
     buffer.put(array1);
-    var n1 = buffer.pop();
+    var n1 = buffer.shift();
     t.is(n1, array1[0]);
     t.is(buffer.size(), array1.length-1);
     t.is(buffer[0], array1[1]);
@@ -186,13 +186,13 @@ test('CircularBuffer#pop', t => {
     
     buffer.put(array2);
     t.is(buffer.size(), size);
-    var n2 = buffer.pop();
+    var n2 = buffer.shift();
     t.is(n2, array1[4]);
     t.is(buffer._beginIndex, 0);
     t.is(buffer.size(), size-1);
     var i = 0;
     var n;
-    while(n = buffer.pop()) {
+    while(n = buffer.shift()) {
         t.is(n, array2[i++]);
         t.is(buffer.size(), size-1-i);
     }

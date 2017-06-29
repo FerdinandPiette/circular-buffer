@@ -10,7 +10,8 @@
   },
   "scripts": {
     "start": "gulp run",
-    "clean": "gulp clean"
+    "clean": "gulp clean",
+    "test": "ava -v"
   },
   "author": "Ferdinand Piette",
   "license": "ISC",
@@ -20,6 +21,7 @@
     "debug": "^2.6.8"
   },
   "devDependencies": {
+    "ava": "^0.20.0",
     "babel-core": "^6.24.1",
     "babel-plugin-syntax-async-functions": "^6.13.0",
     "babel-plugin-transform-class-properties": "^6.24.1",

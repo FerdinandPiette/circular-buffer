@@ -29,7 +29,7 @@ console.log('buffer[0]:', buffer[0]); // 12
 console.log('buffer[5]:',buffer[5]);  // 16
 
 while(buffer.size() > 0) {
-    console.log(buffer.pop());
+    console.log(buffer.shift());
 }
 console.log('There is ', buffer.size(), 'elements in the buffer');
 ```

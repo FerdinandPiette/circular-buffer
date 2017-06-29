@@ -14,12 +14,14 @@ var debug = (0, _debug2.default)('circular-buffer');
 
 var InstanceMetaProgrammingInterface = {
     get: function (object, property) {
-        var abstractIndex = parseInt(property);
-        if (Number.isInteger(abstractIndex)) {
-            let realIndex = (object._beginIndex + abstractIndex) % object.capacity();
-            return object._buffer[realIndex];
+        if ('string' === typeof property) {
+            var abstractIndex = parseInt(property);
+            if (Number.isInteger(abstractIndex)) {
+                let realIndex = (object._beginIndex + abstractIndex) % object.capacity();
+                return object._buffer[realIndex];
+            }
+            return object[property];
         }
-        return object[property];
     }
 };
 
@@ -69,7 +71,7 @@ var CircularBuffer = class CircularBuffer {
         return true;
     }
     push(element) {
-        this.put(Buffer.from([element]));
+        return this.put(Buffer.from([element]));
     }
     get(size) {
         if (size > this.size()) {
@@ -90,7 +92,7 @@ var CircularBuffer = class CircularBuffer {
         return data;
     }
     pop() {
-        return this.get(1);
+        return this.get(1)[0];
     }
     getRawBuffer() {
         return this._buffer;

@@ -1,12 +1,12 @@
 {
-  "name": "circular-buffer",
+  "name": "ring-buffer",
   "version": "1.0.0",
-  "description": "NodeJS circular buffer based on native Buffer",
+  "description": "NodeJS ring buffer (also named circular buffer) based on native Buffer",
   "keywords": [],
-  "homepage": "https://github.com/FerdinandPiette/circular-buffer",
+  "homepage": "https://github.com/FerdinandPiette/ring-buffer",
   "repository": {
     "type": "git",
-    "url": "https://github.com/FerdinandPiette/circular-buffer.git"
+    "url": "https://github.com/FerdinandPiette/ring-buffer.git"
   },
   "scripts": {
     "start": "gulp run",
@@ -15,10 +15,9 @@
   },
   "author": "Ferdinand Piette",
   "license": "ISC",
-  "main": "build/CircularBuffer.js",
+  "main": "build/RingBuffer.js",
   "dependencies": {
-    "babel-runtime": "^6.23.0",
-    "debug": "^2.6.8"
+    "babel-runtime": "^6.23.0"
   },
   "devDependencies": {
     "ava": "^0.20.0",

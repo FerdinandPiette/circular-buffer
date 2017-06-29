@@ -3,10 +3,10 @@
   "version": "1.0.0",
   "description": "NodeJS circular buffer based on native NodeJS Buffer",
   "keywords": [],
-  "homepage": "https://github.com/FerdinandPiette/circular-buffer",
+  "homepage": "https://github.com/FerdinandPiette/cyclic-buffer",
   "repository": {
     "type": "git",
-    "url": "https://github.com/FerdinandPiette/circular-buffer.git"
+    "url": "https://github.com/FerdinandPiette/cyclic-buffer.git"
   },
   "scripts": {
     "start": "gulp run",

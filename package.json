@@ -1,6 +1,6 @@
 {
   "name": "cyclic-buffer",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "NodeJS circular buffer based on native NodeJS Buffer",
   "keywords": [],
   "homepage": "https://github.com/FerdinandPiette/cyclic-buffer",

@@ -1,6 +1,6 @@
 {
   "name": "cyclic-buffer",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "NodeJS circular buffer based on native NodeJS Buffer",
   "keywords": [],
   "homepage": "https://github.com/FerdinandPiette/cyclic-buffer",
@@ -43,6 +43,7 @@
     "gulp-sourcemaps": "^2.6.0",
     "gulp-util": "^3.0.8",
     "gulp-watch": "^4.3.11",
+    "memwatch-next": "^0.3.0",
     "nodemon": "^1.11.0",
     "source-map-support": "^0.4.15",
     "uglify-js": "^3.0.1"

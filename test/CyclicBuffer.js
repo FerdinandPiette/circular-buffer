@@ -1,13 +1,13 @@
-import CircularBuffer from '../build/CircularBuffer';
+import CyclicBuffer from '../build/CyclicBuffer';
 import test from 'ava';
 
-test('CircularBuffer#constructor', t => {    
+test('CyclicBuffer#constructor', t => {    
     const size = 5;
-    var buffer = new CircularBuffer(size);
+    var buffer = new CyclicBuffer(size);
     
     t.plan(6);
     
-    t.true(buffer instanceof CircularBuffer);
+    t.true(buffer instanceof CyclicBuffer);
     t.is(buffer._maxLength, size);
     t.is(buffer._beginIndex, 0);
     t.is(buffer._size, 0);
@@ -15,20 +15,20 @@ test('CircularBuffer#constructor', t => {
     t.is(buffer._buffer.length, size);
 });
 
-test('CircularBuffer#getRawBuffer', t => {
+test('CyclicBuffer#getRawBuffer', t => {
     t.plan(2);
     
     const size = 5;
-    var buffer = new CircularBuffer(size);
+    var buffer = new CyclicBuffer(size);
     var rawBuffer = buffer.getRawBuffer();
     
     t.true(rawBuffer instanceof Buffer);
     t.is(rawBuffer, buffer._buffer);
 });
 
-test('CircularBuffer#put', t => {    
+test('CyclicBuffer#put', t => {    
     const size = 5;
-    var buffer = new CircularBuffer(size);
+    var buffer = new CyclicBuffer(size);
     var array1 = [10,11,12];
     var array2 = [13,14,15];
     var array3 = [16,17,18,19,20,21,22];
@@ -51,9 +51,9 @@ test('CircularBuffer#put', t => {
     t.is(buffer._beginIndex, 1);
 });
 
-test('CircularBuffer#accessor[]', t => {
+test('CyclicBuffer#accessor[]', t => {
     const size = 5;
-    var buffer = new CircularBuffer(size);
+    var buffer = new CyclicBuffer(size);
     var array1 = [10,11,12];
     var array2 = [13,14,15];
     
@@ -72,9 +72,9 @@ test('CircularBuffer#accessor[]', t => {
     t.is(buffer[size], array1[1]);
 });
 
-test('CircularBuffer#get', t => {
+test('CyclicBuffer#get', t => {
     const size = 5;
-    var buffer = new CircularBuffer(size);
+    var buffer = new CyclicBuffer(size);
     var array1 = [9,10,11,12];
     var array2 = [13,14,15,16];
     
@@ -107,9 +107,9 @@ test('CircularBuffer#get', t => {
     
 });
 
-test('CircularBuffer#capacity', t => {
+test('CyclicBuffer#capacity', t => {
     const size = 5;
-    var buffer = new CircularBuffer(size);
+    var buffer = new CyclicBuffer(size);
     var array1 = [9,10,11,12];
     var array2 = [13,14,15,16];
     
@@ -128,9 +128,9 @@ test('CircularBuffer#capacity', t => {
     t.is(buffer.capacity(), size);
 });
 
-test('CircularBuffer#size', t => {
+test('CyclicBuffer#size', t => {
     const size = 5;
-    var buffer = new CircularBuffer(size);
+    var buffer = new CyclicBuffer(size);
     var array1 = [9,10,11,12];
     var array2 = [13,14,15,16];
     
@@ -149,9 +149,9 @@ test('CircularBuffer#size', t => {
     t.is(buffer.size(), 0);
 });
 
-test('CircularBuffer#push', t => {
+test('CyclicBuffer#push', t => {
     const size = 5;
-    var buffer = new CircularBuffer(size);
+    var buffer = new CyclicBuffer(size);
     var array1 = [9,10,11,12,13]
     var array2 = [14,15,16,17];
     
@@ -173,9 +173,9 @@ test('CircularBuffer#push', t => {
     t.is(buffer[0], array1[4]);
 });
 
-test('CircularBuffer#shift', t => {
+test('CyclicBuffer#shift', t => {
     const size = 5;
-    var buffer = new CircularBuffer(size);
+    var buffer = new CyclicBuffer(size);
     var array1 = [9,10,11,12,13]
     var array2 = [14,15,16,17];
     
@@ -201,4 +201,16 @@ test('CircularBuffer#shift', t => {
         t.is(buffer.size(), size-1-i);
     }
     t.is(buffer.size(), 0);
+});
+
+test('CyclicBuffer#reset', t => {
+    const size = 5;
+    var buffer = new CyclicBuffer(size);
+    buffer.put([9,10,11,12,13]);
+    
+    t.plan(2);
+    
+    buffer.reset();
+    t.is(buffer.size(), 0);
+    t.is(buffer.capacity(), 5);
 });

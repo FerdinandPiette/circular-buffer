@@ -1,11 +1,16 @@
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
 //import debugFactory from 'debug';
 //var debug = debugFactory('circular-buffer');
 
 var InstanceMetaProgrammingInterface = {
-    get: function(object, property) {
-        if('string' === typeof property) {
+    get: function (object, property) {
+        if ('string' === typeof property) {
             var abstractIndex = parseInt(property);
-            if(Number.isInteger(abstractIndex)) {
+            if (Number.isInteger(abstractIndex)) {
                 let realIndex = (object._beginIndex + abstractIndex) % object.capacity();
                 return object._buffer[realIndex];
             }
@@ -15,18 +20,21 @@ var InstanceMetaProgrammingInterface = {
 };
 
 var ModelMetaProgrammingInterface = {
-    construct: function(target, args) {
+    construct: function (target, args) {
         var instance = new target(...args);
         return new Proxy(instance, InstanceMetaProgrammingInterface);
     }
 };
 
-var CircularBuffer = class CircularBuffer {
+var CyclicBuffer = class CyclicBuffer {
     constructor(size) {
         this._maxLength = size;
+        this._buffer = Buffer.alloc(this._maxLength);
+        this.reset();
+    }
+    reset() {
         this._beginIndex = 0;
         this._size = 0;
-        this._buffer = Buffer.alloc(this._maxLength);
     }
     capacity() {
         return this._maxLength;
@@ -35,21 +43,25 @@ var CircularBuffer = class CircularBuffer {
         return this._size;
     }
     put(enumerable) {
-        if(!(enumerable instanceof Buffer)) { enumerable = Buffer.from(enumerable); }
-        if(enumerable.length > this.capacity()) { return false; }
+        if (!(enumerable instanceof Buffer)) {
+            enumerable = Buffer.from(enumerable);
+        }
+        if (enumerable.length > this.capacity()) {
+            return false;
+        }
 
         var writingIndex = (this._beginIndex + this.size()) % this.capacity();
-        if(this.capacity() < writingIndex + enumerable.length) {
+        if (this.capacity() < writingIndex + enumerable.length) {
             // split & copy
             let copiedElement = this.capacity() - writingIndex;
             enumerable.copy(this._buffer, writingIndex, 0, copiedElement);
-            enumerable.copy(this._buffer, 0, copiedElement, enumerable.length)
+            enumerable.copy(this._buffer, 0, copiedElement, enumerable.length);
         } else {
             // copy
             enumerable.copy(this._buffer, writingIndex, 0, enumerable.length);
         }
         this._size += enumerable.length;
-        if(this._size > this.capacity()) {
+        if (this._size > this.capacity()) {
             this._beginIndex = (this._beginIndex + this._size - this.capacity()) % this.capacity();
             this._size = this.capacity();
         }
@@ -59,9 +71,11 @@ var CircularBuffer = class CircularBuffer {
         return this.put(Buffer.from([element]));
     }
     get(size) {
-        if(size > this.size()) { size = this.size(); }
+        if (size > this.size()) {
+            size = this.size();
+        }
         var data = Buffer.alloc(size);
-        if(this._beginIndex + size > this.capacity()) {
+        if (this._beginIndex + size > this.capacity()) {
             // split & copy
             let copiedElement = this.capacity() - this._beginIndex;
             this._buffer.copy(data, 0, this._beginIndex, this.capacity());
@@ -82,4 +96,5 @@ var CircularBuffer = class CircularBuffer {
     }
 };
 
-export default new Proxy(CircularBuffer, ModelMetaProgrammingInterface);
+exports.default = new Proxy(CyclicBuffer, ModelMetaProgrammingInterface);
+//# sourceMappingURL=CyclicBuffer.js.map

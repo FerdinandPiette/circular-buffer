@@ -1,5 +1,5 @@
 # cyclic-buffer
-NodeJS ciclyc (circular/ring) buffer based on native NodeJS Buffer.
+NodeJS cyclic (circular/ring) buffer based on native NodeJS Buffer.
 
 ## Installation
 `npm install cyclic-buffer --save`
@@ -90,7 +90,7 @@ Remove the first element of the buffer
 
 ###  CyclicBuffer#get(size)
 
-Get a new buffer containing the  `${size}` first elements of the buffer without removing them from the cyclic buffer.
+Get a new buffer containing the  `${size}` first elements of the buffer. These elements are removed from the original cyclic buffer.
 
 #### Arguments
 - `size` *(Number)*: The number of elements to retrieve.
